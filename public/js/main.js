@@ -15,7 +15,7 @@ angular.module('Stars')
         var scene = new THREE.Scene();
 
         // create a camera, which defines where we're looking at.
-        var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 30000);
+        var camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, 0.1, 30000);
 
         // create a render and set the size
         var renderer = new THREE.WebGLRenderer({antialias:true});
@@ -34,7 +34,7 @@ angular.module('Stars')
 
         // rotate and position the plane
         plane.rotation.x = -0.5 * Math.PI;
-        plane.position.x = 15;
+        // plane.position.x = 15;
         plane.position.y = 0;
         plane.position.z = 0;
 
@@ -205,7 +205,7 @@ angular.module('Stars')
         scene.add(ambientLight);
 
         // add light source for the sun
-        var light = new THREE.PointLight( "white", 5, 2500, 100);
+        var light = new THREE.PointLight( "white", 1.5, 2500, 100);
         light.position.set( 50, 50, 25 );
         scene.add( light );
 
@@ -225,6 +225,9 @@ angular.module('Stars')
         // gui.add(controls, 'bouncingSpeed', 0, 0.5);
 
 
+
+
+
         render();
 
         function render() {
@@ -235,7 +238,7 @@ angular.module('Stars')
             earth.rotation.y += .1 / 20
 
             // rotate sun
-            // sphere.rotation.x += controls.rotationSpeed;
+            sphere.rotation.y += .1/200
             // sphere.rotation.y += controls.rotationSpeed;
             // sphere.rotation.z += controls.rotationSpeed;
 
