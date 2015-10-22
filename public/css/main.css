@@ -1,0 +1,73 @@
+/*@font-face {
+    font-family: star;
+    src: url('/fonts/Starcrafts.ttf');
+}
+
+#text{
+    font-size: 40px;
+    font-family: star;
+    opacity: 1;
+    color: aliceblue;
+}
+
+.menus{
+    position: absolute;
+    background: linear-gradient(90deg, #0E184A, #0F1A50,#162875, #203BAE,#203BAE, #162875,#0F1A50,#0E184A);
+    top: 79%;
+    height: 20%;
+    width: 100%;
+    border-image: linear-gradient(to left, #122A5A 20%, #3CFFD4 50%, #122A5A 100%) 100% 0 100% 0/.3em 0 0.0em 0 stretch;
+    opacity: .4;
+    box-shadow: inset 0 0 40px #0E1C4B, 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    color: aliceblue;
+    font-family: star;
+    font-size: 18px;
+
+}
+.menus:hover{
+    opacity:.95;
+}
+
+.css3{
+       position: fixed;
+    box-shadow: 0 1px 4px #3CFFD4;}
+
+.css3:after{
+    content: "";
+    position: fixed;
+    z-index: 1;
+    box-shadow: 0 22px 114px 16px #3CFFD4;
+    bottom: 0px;
+    left: 20%;
+    right: 0%;
+    width: 61%;
+    height: 0%;
+    top: 78%;
+
+
+}
+.textbutton{
+     position:absolute;
+    background: linear-gradient(90deg, #B26B00, #CC7A00,#E68A00, #E68A00, #E68A00, #E68A00, #CC7A00, #B26B00);
+    top: 1%;
+    height: 3%;
+    width: 15%;
+    border-radius: 5px 100px;
+    opacity: .7;
+         border: none;
+    position: relative;
+    margin: 20px;
+    border-radius: 0 100px;
+    color:aliceblue;
+    font-family: star;
+    text-align: center;
+    line-height: 1em;
+        outline: none;
+        font-size: 1.5em;
+        text-shadow: 2px 2px black;
+}
+
+.textbutton:hover{
+    opacity:1;
+     box-shadow: 0px 1px 40px -3px #E68A00;
+}*/

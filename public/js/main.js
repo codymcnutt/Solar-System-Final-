@@ -15,7 +15,7 @@ angular.module('Stars')
         var scene = new THREE.Scene();
 
         // create a camera, which defines where we're looking at.
-        var camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, 0.1, 30000);
+        var camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, .1, 320000);
 
         // create a render and set the size
         var renderer = new THREE.WebGLRenderer({antialias:true});
@@ -42,10 +42,10 @@ angular.module('Stars')
         scene.add(plane);
 
        
-        var imageDir = "./public/img/"
+        var imageDir = "/img/"
 
         // create a sun
-        var sphereGeometry = new THREE.SphereGeometry(100, 20, 20);
+        var sphereGeometry = new THREE.SphereGeometry(100, 100, 100);
         var sunTexture = THREE.ImageUtils.loadTexture(imageDir + "sun.jpg")
         var sphereMaterial = new THREE.MeshBasicMaterial({map : sunTexture});
         var sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
@@ -59,8 +59,50 @@ angular.module('Stars')
         // add the sphere to the scene
         scene.add(sphere);
 
+        // create a fake planet
+        var sphereGeometry = new THREE.SphereGeometry(1, 1, 1);
+        var fake = new THREE.Mesh(sphereGeometry, sphereMaterial);
+
+        // position the fake planet
+        fake.position.x = 20;
+        fake.position.y = 3;
+        fake.position.z = 2;
+        fake.castShadow = true;
+
+        // add the fake planet to the scene
+        scene.add(fake);
+
+        // create a second fake planet
+        var sphereGeometry = new THREE.SphereGeometry(1, 1, 1);
+        var fake2 = new THREE.Mesh(sphereGeometry, sphereMaterial);
+
+        // position the second fake planet
+        fake2.position.x = 20;
+        fake2.position.y = 3;
+        fake2.position.z = 2;
+        fake2.castShadow = true;
+
+        // add the second fake planet to the scene
+        scene.add(fake2);
+
+        // create a third fake planet
+        var sphereGeometry = new THREE.SphereGeometry(1, 1, 1);
+        var fake3 = new THREE.Mesh(sphereGeometry, sphereMaterial);
+
+        // position the third fake planet
+        fake3.position.x = 20;
+        fake3.position.y = 3;
+        fake3.position.z = 2;
+        fake3.castShadow = true;
+
+        // add the second third planet to the scene
+        scene.add(fake3);
+
+
+
+
         // create a second sphere
-        var sphereGeometry2 = new THREE.SphereGeometry( .3495, 20, 20);
+        var sphereGeometry2 = new THREE.SphereGeometry( 3 *.3495, 20, 20);
         var mercuryTexture = THREE.ImageUtils.loadTexture(imageDir + "mercury.jpg")
         var sphereMaterial2 = new THREE.MeshLambertMaterial({map: mercuryTexture, overdraw: 5});
         var sphere2 = new THREE.Mesh(sphereGeometry2, sphereMaterial2);
@@ -74,23 +116,23 @@ angular.module('Stars')
         // add the second sphere to the scene
         scene.add(sphere2);
 
-        // create a third sphere
-        var sphereGeometry3 = new THREE.SphereGeometry( .8697, 20, 20);
+        // create venus
+        var sphereGeometry3 = new THREE.SphereGeometry( 3 *.8697, 20, 20);
         var venusTexture = THREE.ImageUtils.loadTexture(imageDir + "venus.jpg")
         var sphereMaterial3 = new THREE.MeshLambertMaterial({map : venusTexture});
-        var sphere3 = new THREE.Mesh(sphereGeometry3, sphereMaterial3);
+        var venus = new THREE.Mesh(sphereGeometry3, sphereMaterial3);
 
-        // position the third sphere
-        sphere3.position.x = -120;
-        sphere3.position.y = 3;
-        sphere3.position.z = 2;
-        sphere3.castShadow = true;
+        // position venus
+        venus.position.x = -120;
+        venus.position.y = 3;
+        venus.position.z = 2;
+        venus.castShadow = true;
 
-        // add the third sphere to the scene
-        scene.add(sphere3);
+        // add venus
+        scene.add(venus);
 
         // create Earth
-        var sphereGeometry4 = new THREE.SphereGeometry( .9154, 20, 20);
+        var sphereGeometry4 = new THREE.SphereGeometry( 3 *.9154, 20, 20);
         var earthTexture = THREE.ImageUtils.loadTexture(imageDir + "earth.jpg")
         var sphereMaterial4 = new THREE.MeshPhongMaterial({map: earthTexture});
         var earth = new THREE.Mesh(sphereGeometry4, sphereMaterial4);
@@ -105,7 +147,7 @@ angular.module('Stars')
         scene.add(earth);
 
         // create Earth Moon
-        var sphereGeometry4 = new THREE.SphereGeometry( .2154, 20, 20);
+        var sphereGeometry4 = new THREE.SphereGeometry( 3 *.2154, 20, 20);
         var earthTexture = THREE.ImageUtils.loadTexture(imageDir + "moon.jpg")
         var sphereMaterial4 = new THREE.MeshPhongMaterial({map: earthTexture});
         var earthMoon = new THREE.Mesh(sphereGeometry4, sphereMaterial4);
@@ -120,37 +162,37 @@ angular.module('Stars')
         scene.add(earthMoon);
 
         // create Mars
-        var sphereGeometry5 = new THREE.SphereGeometry( .4856, 20, 20);
+        var sphereGeometry5 = new THREE.SphereGeometry( 3 *.4856, 20, 20);
         var marsTexture = THREE.ImageUtils.loadTexture(imageDir + "mars.jpg")
         var sphereMaterial5 = new THREE.MeshLambertMaterial({map: marsTexture});
-        var sphere5 = new THREE.Mesh(sphereGeometry5, sphereMaterial5);
+        var mars = new THREE.Mesh(sphereGeometry5, sphereMaterial5);
 
         // position Mars
-        sphere5.position.x = -280;
-        sphere5.position.y = 3;
-        sphere5.position.z = 2;
-        sphere5.castShadow = true;
+        mars.position.x = -280;
+        mars.position.y = 3;
+        mars.position.z = 2;
+        mars.castShadow = true;
 
         // add Mars
-        scene.add(sphere5);
+        scene.add(mars);
 
         // create Jupiter
-        var sphereGeometry5 = new THREE.SphereGeometry( 10.2725, 20, 20);
+        var sphereGeometry5 = new THREE.SphereGeometry( 3 *10.2725, 20, 20);
         var marsTexture = THREE.ImageUtils.loadTexture(imageDir + "jupiter.jpg")
         var sphereMaterial5 = new THREE.MeshLambertMaterial({map: marsTexture});
-        var sphere5 = new THREE.Mesh(sphereGeometry5, sphereMaterial5);
+        var jupiter = new THREE.Mesh(sphereGeometry5, sphereMaterial5);
 
         // position Jupiter
-        sphere5.position.x = -380;
-        sphere5.position.y = 3;
-        sphere5.position.z = 2;
-        sphere5.castShadow = true;
+        jupiter.position.x = -380;
+        jupiter.position.y = 3;
+        jupiter.position.z = 2;
+        jupiter.castShadow = true;
 
         // add Jupiter to the scene
-        scene.add(sphere5);
+        scene.add(jupiter);
 
         // create Saturn
-        var sphereGeometry5 = new THREE.SphereGeometry( 8.3653, 20, 20);
+        var sphereGeometry5 = new THREE.SphereGeometry( 3 *8.3653, 20, 20);
         var marsTexture = THREE.ImageUtils.loadTexture(imageDir + "saturn.jpg")
         var sphereMaterial5 = new THREE.MeshLambertMaterial({map: marsTexture});
         var sphere5 = new THREE.Mesh(sphereGeometry5, sphereMaterial5);
@@ -165,7 +207,7 @@ angular.module('Stars')
         scene.add(sphere5);
 
         // create Uranus
-        var sphereGeometry5 = new THREE.SphereGeometry( 3.3723, 20, 20);
+        var sphereGeometry5 = new THREE.SphereGeometry( 3 *3.3723, 20, 20);
         var marsTexture = THREE.ImageUtils.loadTexture(imageDir + "uranus.jpg")
         var sphereMaterial5 = new THREE.MeshLambertMaterial({map: marsTexture});
         var sphere5 = new THREE.Mesh(sphereGeometry5, sphereMaterial5);
@@ -180,7 +222,7 @@ angular.module('Stars')
         scene.add(sphere5);
 
         // create Neptune
-        var sphereGeometry5 = new THREE.SphereGeometry( .4856, 20, 20);
+        var sphereGeometry5 = new THREE.SphereGeometry( 3 *.4856, 20, 20);
         var marsTexture = THREE.ImageUtils.loadTexture(imageDir + "neptune.jpg")
         var sphereMaterial5 = new THREE.MeshLambertMaterial({map: marsTexture});
         var sphere5 = new THREE.Mesh(sphereGeometry5, sphereMaterial5);
@@ -224,6 +266,27 @@ angular.module('Stars')
         // gui.add(controls, 'rotationSpeed', 0, 0.5);
         // gui.add(controls, 'bouncingSpeed', 0, 0.5);
 
+    
+
+        var axes = new THREE.AxisHelper(100);
+        scene.add( axes );
+        
+        // var imagePrefix = imageDir + "hubble";
+        // // var directions  = ["right", "left", "top", "bottom", "front", "back"];
+        // var imageSuffix = ".jpg";
+        // var skyGeometry = new THREE.CubeGeometry( 300000, 300000, 300000 );   
+        
+        // var materialArray = [];
+        // for (var i = 0; i < 6; i++)
+        //     materialArray.push( new THREE.MeshBasicMaterial({
+        //         map: THREE.ImageUtils.loadTexture( imagePrefix + imageSuffix ),
+        //         // between imagePrefix and imageSuffix add '+ direction[i]'
+        //         // for six different unique photos with '-right' and '-left' etc in their filepaths
+        //         side: THREE.BackSide
+        //     }));
+        // var skyMaterial = new THREE.MeshFaceMaterial( materialArray );
+        // var skyBox = new THREE.Mesh( skyGeometry, skyMaterial );
+        // scene.add( skyBox );
 
 
 
@@ -232,13 +295,24 @@ angular.module('Stars')
 
         function render() {
             // stats.update();
-            
-
+            sphere.add(earthMoon)
+            sphere.add(earth)
+            fake.add(sphere2)
+            fake3.add(venus)
             // rotate earth
             earth.rotation.y += .1 / 20
 
+            earthMoon.rotation.y += .1/20
+
+            fake.rotation.y += .1/5
+            fake2.rotation.y += .1/35
+            fake3.rotation.y += .1/50
+
+            fake2.add(mars)
+          
+
             // rotate sun
-            sphere.rotation.y += .1/200
+            sphere.rotation.y += .1/20
             // sphere.rotation.y += controls.rotationSpeed;
             // sphere.rotation.z += controls.rotationSpeed;
 
@@ -273,6 +347,7 @@ angular.module('Stars')
 			camera.position.x = earth.position.x - 10
         	camera.position.y = earth.position.y
         	camera.position.z = earth.position.z
+
 		}
 
     }
