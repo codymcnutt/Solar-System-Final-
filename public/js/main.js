@@ -4,13 +4,12 @@ angular.module('Stars')
 	.controller("MainController", ["$scope", function($scope){
 		
 	var moonConstructor = function(parentPlanet, numOfMoons, closestMoon, farthestMoon, smallestMoon, largestMoon){
-		
+
 	}
-		
 
+
+	
 	function init() {
-
-        
 
         // var stats = initStats();
 
@@ -21,7 +20,7 @@ angular.module('Stars')
         var camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, .1, 320000);
 
         // create a render and set the size
-        var renderer = new THREE.WebGLRenderer({antialias:true});
+        var renderer = new THREE.WebGLRenderer({antialias:false});
 
         orbit = new THREE.OrbitControls(camera, renderer.domElement);
 
@@ -44,14 +43,41 @@ angular.module('Stars')
         // add the plane to the scene
         scene.add(plane);
 
-       
+       	var scale = 3
+
         var imageDir = "/img/"
 
+        var kuiperBelt = []
+
+	var kuiperConstructor = function(){
+		var size = Math.random() * 10
+		var scale = 3
+		var sphereGeometry = new THREE.SphereGeometry( scale * size, 5, 5);
+        var asteroidTexture = THREE.ImageUtils.loadTexture(imageDir + "moon.jpg")
+        var sphereMaterial = new THREE.MeshLambertMaterial();
+        var asteroid = new THREE.Mesh(sphereGeometry, sphereMaterial);
+
+        var asteroidLocX = Math.random() * 800
+        var asteroidLocZ = Math.random() * 800
+
+
+        asteroid.position.x = asteroidLocX;
+        asteroid.position.y = 3
+        asteroid.position.z = asteroidLocZ
+        asteroid.castShadow = true;
+
+        scene.add(asteroid)
+	}
+
         // create a sun
-        var sphereGeometry = new THREE.SphereGeometry(100, 100, 100);
-        var sunTexture = THREE.ImageUtils.loadTexture(imageDir + "sun.jpg")
-        var sphereMaterial = new THREE.MeshBasicMaterial({map : sunTexture});
-        var sun = new THREE.Mesh(sphereGeometry, sphereMaterial);
+        var sphereGeometry = new THREE.SphereGeometry(100, 90, 50);
+        var sunTexture = THREE.ImageUtils.loadTexture(imageDir + "suntexture.jpg", THREE.SphericalReflectionMapping);
+        var groundLayer = THREE.ImageUtils.loadTexture(imageDir + "sun.jpg")
+
+        var sphereMaterial2 = new THREE.MeshBasicMaterial({map : groundLayer});
+      
+        var sphereMaterial = new THREE.MeshBasicMaterial({wireframe : false, opacity:0.4, transparent:true, envMap : sunTexture, overdraw:5000});
+        var sun = new THREE.SceneUtils.createMultiMaterialObject(sphereGeometry, [ sphereMaterial2, sphereMaterial]);
 
         // position the sphere
         sun.position.x = 20;
@@ -153,13 +179,13 @@ angular.module('Stars')
 
 
         // create a second sphere
-        var sphereGeometry2 = new THREE.SphereGeometry( 3 *.3495, 20, 20);
+        var sphereGeometry2 = new THREE.SphereGeometry( scale * .3495, 20, 20);
         var mercuryTexture = THREE.ImageUtils.loadTexture(imageDir + "mercury.jpg")
         var sphereMaterial2 = new THREE.MeshLambertMaterial({map: mercuryTexture, overdraw: 5});
         var mercury = new THREE.Mesh(sphereGeometry2, sphereMaterial2);
 
         // position the second sphere
-        mercury.position.x = -105;
+        mercury.position.x = -83.2041;
         mercury.position.y = 3;
         mercury.position.z = 2;
         mercury.castShadow = true;
@@ -168,13 +194,13 @@ angular.module('Stars')
         scene.add(mercury);
 
         // create venus
-        var sphereGeometry3 = new THREE.SphereGeometry( 3 *.8697, 20, 20);
+        var sphereGeometry3 = new THREE.SphereGeometry( scale * .8697, 20, 20);
         var venusTexture = THREE.ImageUtils.loadTexture(imageDir + "venus.jpg")
         var sphereMaterial3 = new THREE.MeshLambertMaterial({map : venusTexture});
         var venus = new THREE.Mesh(sphereGeometry3, sphereMaterial3);
 
         // position venus
-        venus.position.x = -120;
+        venus.position.x = -155.4599;
         venus.position.y = 3;
         venus.position.z = 2;
         venus.castShadow = true;
@@ -183,13 +209,13 @@ angular.module('Stars')
         scene.add(venus);
 
         // create Earth
-        var sphereGeometry4 = new THREE.SphereGeometry( 3 *.9154, 20, 20);
+        var sphereGeometry4 = new THREE.SphereGeometry( scale * .9154, 20, 20);
         var earthTexture = THREE.ImageUtils.loadTexture(imageDir + "earth.jpg")
         var sphereMaterial4 = new THREE.MeshPhongMaterial({map: earthTexture});
         var earth = new THREE.Mesh(sphereGeometry4, sphereMaterial4);
 
         // position Earth
-        earth.position.x = -180;
+        earth.position.x = -214.49426;
         earth.position.y = 3;
         earth.position.z = 2;
         earth.castShadow = true;
@@ -198,13 +224,13 @@ angular.module('Stars')
         scene.add(earth);
 
         // create Earth Moon
-        var sphereGeometry4 = new THREE.SphereGeometry( 3 *.2154, 20, 20);
+        var sphereGeometry4 = new THREE.SphereGeometry( scale * .2154, 20, 20);
         var earthTexture = THREE.ImageUtils.loadTexture(imageDir + "moon.jpg")
         var sphereMaterial4 = new THREE.MeshPhongMaterial({map: earthTexture});
         var earthMoon = new THREE.Mesh(sphereGeometry4, sphereMaterial4);
 
         // position Earth Moon
-        earthMoon.position.x = -185;
+        earthMoon.position.x = -232.99426;
         earthMoon.position.y = 3;
         earthMoon.position.z = 2;
         earthMoon.castShadow = true;
@@ -213,13 +239,13 @@ angular.module('Stars')
         scene.add(earthMoon);
 
         // create Mars
-        var sphereGeometry5 = new THREE.SphereGeometry( 3 *.4856, 20, 20);
+        var sphereGeometry5 = new THREE.SphereGeometry( scale * .4856, 20, 20);
         var marsTexture = THREE.ImageUtils.loadTexture(imageDir + "mars.jpg")
         var sphereMaterial5 = new THREE.MeshLambertMaterial({map: marsTexture});
         var mars = new THREE.Mesh(sphereGeometry5, sphereMaterial5);
 
         // position Mars
-        mars.position.x = -280;
+        mars.position.x = -327.5002;
         mars.position.y = 3;
         mars.position.z = 2;
         mars.castShadow = true;
@@ -228,13 +254,13 @@ angular.module('Stars')
         scene.add(mars);
 
         // create Jupiter
-        var sphereGeometry5 = new THREE.SphereGeometry( 3 *10.2725, 20, 20);
+        var sphereGeometry5 = new THREE.SphereGeometry( scale * 10.2725, 20, 20);
         var marsTexture = THREE.ImageUtils.loadTexture(imageDir + "jupiter.jpg")
         var sphereMaterial5 = new THREE.MeshLambertMaterial({map: marsTexture});
         var jupiter = new THREE.Mesh(sphereGeometry5, sphereMaterial5);
 
         // position Jupiter
-        jupiter.position.x = -380;
+        jupiter.position.x = -1118.2915;
         jupiter.position.y = 3;
         jupiter.position.z = 2;
         jupiter.castShadow = true;
@@ -242,14 +268,21 @@ angular.module('Stars')
         // add Jupiter to the scene
         scene.add(jupiter);
 
+        for(var x = 0; x < 2000; x++){
+        	kuiperConstructor()
+        }
+        for(var x = 0; x < kuiperConstructor.length; i++){
+        	scene.add(kuiperConstructor[i])
+        }
+
         // create Saturn
-        var sphereGeometry5 = new THREE.SphereGeometry( 3 *8.3653, 20, 20);
+        var sphereGeometry5 = new THREE.SphereGeometry( scale * 8.3653, 20, 20);
         var marsTexture = THREE.ImageUtils.loadTexture(imageDir + "saturn.jpg")
         var sphereMaterial5 = new THREE.MeshLambertMaterial({map: marsTexture});
         var saturn = new THREE.Mesh(sphereGeometry5, sphereMaterial5);
 
         // position Saturn
-        saturn.position.x = -480;
+        saturn.position.x = -2053.7373;
         saturn.position.y = 3;
         saturn.position.z = 2;
         saturn.castShadow = true;
@@ -258,13 +291,13 @@ angular.module('Stars')
         scene.add(saturn);
 
         // create Uranus
-        var sphereGeometry5 = new THREE.SphereGeometry( 3 *3.3723, 20, 20);
+        var sphereGeometry5 = new THREE.SphereGeometry( scale * 3.3723, 20, 20);
         var marsTexture = THREE.ImageUtils.loadTexture(imageDir + "uranus.jpg")
         var sphereMaterial5 = new THREE.MeshLambertMaterial({map: marsTexture});
         var uranus = new THREE.Mesh(sphereGeometry5, sphereMaterial5);
 
         // position Uranus
-        uranus.position.x = -580;
+        uranus.position.x = -4124.9879;
         uranus.position.y = 3;
         uranus.position.z = 2;
         uranus.castShadow = true;
@@ -273,13 +306,13 @@ angular.module('Stars')
         scene.add(uranus);
 
         // create Neptune
-        var sphereGeometry5 = new THREE.SphereGeometry( 3 *.4856, 20, 20);
+        var sphereGeometry5 = new THREE.SphereGeometry( scale * .4856, 20, 20);
         var marsTexture = THREE.ImageUtils.loadTexture(imageDir + "neptune.jpg")
         var sphereMaterial5 = new THREE.MeshLambertMaterial({map: marsTexture});
         var neptune = new THREE.Mesh(sphereGeometry5, sphereMaterial5);
 
         // position Neptune
-        neptune.position.x = -680;
+        neptune.position.x = -4471.70	;
         neptune.position.y = 3;
         neptune.position.z = 2;
         neptune.castShadow = true;
@@ -329,9 +362,6 @@ angular.module('Stars')
         // var skyMaterial = new THREE.MeshFaceMaterial( materialArray );
         // var skyBox = new THREE.Mesh( skyGeometry, skyMaterial );
         // scene.add( skyBox );
-
-
-
 
         render();
 
