@@ -105,16 +105,16 @@ angular.module('Stars')
         var sphereGeometry2 = new THREE.SphereGeometry( 3 *.3495, 20, 20);
         var mercuryTexture = THREE.ImageUtils.loadTexture(imageDir + "mercury.jpg")
         var sphereMaterial2 = new THREE.MeshLambertMaterial({map: mercuryTexture, overdraw: 5});
-        var sphere2 = new THREE.Mesh(sphereGeometry2, sphereMaterial2);
+        var mercury = new THREE.Mesh(sphereGeometry2, sphereMaterial2);
 
         // position the second sphere
-        sphere2.position.x = -105;
-        sphere2.position.y = 3;
-        sphere2.position.z = 2;
-        sphere2.castShadow = true;
+        mercury.position.x = -105;
+        mercury.position.y = 3;
+        mercury.position.z = 2;
+        mercury.castShadow = true;
 
         // add the second sphere to the scene
-        scene.add(sphere2);
+        scene.add(mercury);
 
         // create venus
         var sphereGeometry3 = new THREE.SphereGeometry( 3 *.8697, 20, 20);
@@ -297,29 +297,22 @@ angular.module('Stars')
             // stats.update();
             sphere.add(earthMoon)
             sphere.add(earth)
-            fake.add(sphere2)
+            fake.add(mercury)
             fake3.add(venus)
             // rotate earth
             earth.rotation.y += .1 / 20
 
             earthMoon.rotation.y += .1/20
 
-            fake.rotation.y += .1/5
-            fake2.rotation.y += .1/35
-            fake3.rotation.y += .1/50
+            fake.rotation.y += (.1/20) * 1.607 
+            fake2.rotation.y += (.1/20) * .802 
+            fake3.rotation.y += (.1/20) * 1.174
 
             fake2.add(mars)
-          
 
             // rotate sun
             sphere.rotation.y += .1/20
-            // sphere.rotation.y += controls.rotationSpeed;
-            // sphere.rotation.z += controls.rotationSpeed;
-
-            // rotate mercury
-            // sphere2.rotation.x += controls.rotationSpeed;
-            // sphere2.rotation.y += controls.rotationSpeed;
-            // sphere2.rotation.z += controls.rotationSpeed;
+           
 
 
             // render using requestAnimationFrame
