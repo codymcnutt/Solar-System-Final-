@@ -2,6 +2,43 @@ angular.module('Stars', [])
 
 angular.module('Stars')
 	.controller("MainController", ["$scope", function($scope){
+
+		$scope.displayPlanet
+
+		var planets = [
+    {
+        name : 'Mercury',
+        description : "Mercury's eccentric orbit takes the small planet as close as 47 million km (29 million miles) and as far as 70 million km (43 million miles) from the sun. If one could stand on the scorching surface of Mercury when it is at its closest point to the sun, the sun would appear more than three times as large as it does when viewed from Earth."
+    },
+    {
+        name : 'Venus',
+        description : "Similar in structure and size to Earth, Venus' thick, toxic atmosphere traps heat in a runaway greenhouse effect. A permanent layer of clouds traps heat, creating surface temperatures hot enough to melt lead. Glimpses below the clouds reveal volcanoes and deformed mountains. Venus spins slowly in the opposite direction of most planets."
+    },
+    {
+        name : 'Earth',
+        description : "Earth, our home planet, is the only planet in our solar system known to harbor life - life that is incredibly diverse. All the things we need to survive exist under a thin layer of atmosphere that separates us from the cold, airless void of space."
+    },
+    {
+        name : 'Mars',
+        description : "Mars is a cold desert world. It is half the diameter of Earth and has the same amount of dry land. Like Earth, Mars has seasons, polar ice caps, volcanoes, canyons and weather, but its atmosphere is too thin for liquid water to exist for long on the surface. There are signs of ancient floods on Mars, but evidence for water now exists mainly in icy soil and thin clouds."
+    },
+    {
+        name : 'Jupiter',
+        description : "Jupiter, the most massive planet in our solar system -- with dozens of moons and an enormous magnetic field -- forms a kind of miniature solar system. Jupiter does resemble a star in composition, but it did not grow big enough to ignite. The planet's swirling cloud stripes are punctuated by massive storms such as the Great Red Spot, which has raged for hundreds of years."
+    },
+    {
+        name : 'Saturn',
+        description : "Adorned with thousands of beautiful ringlets, Saturn is unique among the planets. All four gas giant planets have rings -- made of chunks of ice and rock -- but none are as spectacular or as complicated as Saturn's. Like the other gas giants, Saturn is mostly a massive ball of hydrogen and helium."
+    },
+    {
+        name : 'Uranus',
+        description : "Uranus is the only giant planet whose equator is nearly at right angles to its orbit. A collision with an Earth-sized object may explain the unique tilt. Nearly a twin in size to Neptune, Uranus has more methane in its mainly hydrogen and helium atmosphere than Jupiter or Saturn. Methane gives Uranus its blue tint."
+    },
+    {
+        name : 'Neptune',
+        description : "Dark, cold and whipped by supersonic winds, Neptune is the last of the hydrogen and helium gas giants in our solar system. More than 30 times as far from the sun as Earth, the planet takes almost 165 Earth years to orbit our sun. In 2011 Neptune completed its first orbit since its discovery in 1846. We see (Neptune) as Columbus saw America from the coast of Spain."
+    },
+]
 		
 	
 
@@ -16,7 +53,7 @@ var nRingsMesh
         var scene = new THREE.Scene();
 
         // create a camera, which defines where we're looking at.
-        var camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, .1, 320000);
+        var camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, .1, 520000);
 
         // create a render and set the size
         var renderer = new THREE.WebGLRenderer({antialias:true});
@@ -28,7 +65,7 @@ var nRingsMesh
         renderer.shadowMapEnabled = true;
 
         // create the ground plane
-        var planeGeometry = new THREE.PlaneGeometry(100, 100, 100, 100);
+        var planeGeometry = new THREE.PlaneBufferGeometry(100, 100, 100, 100);
         var planeMaterial = new THREE.MeshLambertMaterial({color: "0xffffff"});
         var plane = new THREE.Mesh(planeGeometry, planeMaterial);
         plane.receiveShadow = true;
@@ -63,7 +100,7 @@ var nRingsMesh
         var asteroidLocZ = positiveOrNegZ >= 0.5 ? (Math.random() + 1) : (Math.random() + 1 ) 
 
         asteroid.position.x = asteroidLocX
-        asteroid.position.y = 3
+        asteroid.position.y = 0
         asteroid.position.z = asteroidLocZ
         asteroid.castShadow = true
 
@@ -85,8 +122,8 @@ var nRingsMesh
 
         // position the sphere
         sun.position.x = 20;
-        sun.position.y = 3;
-        sun.position.z = 2;
+        sun.position.y = 0
+        sun.position.z = 0
         sun.castShadow = true;
 
         // add the sun to the scene
@@ -98,8 +135,8 @@ var nRingsMesh
 
         // position the mercuryOrbitPoint planet
         mercuryOrbitPoint.position.x = 20;
-        mercuryOrbitPoint.position.y = 3;
-        mercuryOrbitPoint.position.z = 2;
+        mercuryOrbitPoint.position.y = 0
+        mercuryOrbitPoint.position.z = 0
         mercuryOrbitPoint.castShadow = true;
 
         // add the mercuryOrbitPoint planet to the scene
@@ -111,8 +148,8 @@ var nRingsMesh
 
         // position the second fake planet
         marsOrbitPoint.position.x = 20;
-        marsOrbitPoint.position.y = 3;
-        marsOrbitPoint.position.z = 2;
+        marsOrbitPoint.position.y = 0
+        marsOrbitPoint.position.z = 0
         marsOrbitPoint.castShadow = true;
 
         // add the second fake planet to the scene
@@ -124,8 +161,8 @@ var nRingsMesh
 
         // position the third fake planet
         venusOrbitPoint.position.x = 20;
-        venusOrbitPoint.position.y = 3;
-        venusOrbitPoint.position.z = 2;
+        venusOrbitPoint.position.y = 0
+        venusOrbitPoint.position.z = 0
         venusOrbitPoint.castShadow = true;
 
         // add the second third planet to the scene
@@ -136,8 +173,8 @@ var nRingsMesh
 
         // position the third fake planet
         jupiterOrbitPoint.position.x = 20;
-        jupiterOrbitPoint.position.y = 3;
-        jupiterOrbitPoint.position.z = 2;
+        jupiterOrbitPoint.position.y = 0
+        jupiterOrbitPoint.position.z = 0
         jupiterOrbitPoint.castShadow = true;
 
         // add the second third planet to the scene
@@ -148,8 +185,8 @@ var nRingsMesh
 
         // position the third fake planet
         saturnOrbitPoint.position.x = 20;
-        saturnOrbitPoint.position.y = 3;
-        saturnOrbitPoint.position.z = 2;
+        saturnOrbitPoint.position.y = 0
+        saturnOrbitPoint.position.z = 0
         saturnOrbitPoint.castShadow = true;
 
         // add the second third planet to the scene
@@ -160,8 +197,8 @@ var nRingsMesh
 
         // position the third fake planet
         uranusOrbitPoint.position.x = 20;
-        uranusOrbitPoint.position.y = 3;
-        uranusOrbitPoint.position.z = 2;
+        uranusOrbitPoint.position.y = 0
+        uranusOrbitPoint.position.z = 0
         uranusOrbitPoint.castShadow = true;
 
         // add the second third planet to the scene
@@ -172,8 +209,8 @@ var nRingsMesh
 
         // position the third fake planet
         neptuneOrbitPoint.position.x = 20;
-        neptuneOrbitPoint.position.y = 3;
-        neptuneOrbitPoint.position.z = 2;
+        neptuneOrbitPoint.position.y = 0
+        neptuneOrbitPoint.position.z = 0
         neptuneOrbitPoint.castShadow = true;
 
         // add the second third planet to the scene
@@ -189,7 +226,7 @@ var nRingsMesh
         var mercury = new THREE.Mesh(sphereGeometry2, sphereMaterial2);
 
         // position the second sphere
-        mercury.position.x = -83.2041;
+        mercury.position.x = -83.2041 * 1.5;
         mercury.position.y = 3;
         mercury.position.z = 2;
         mercury.castShadow = true;
@@ -204,7 +241,7 @@ var nRingsMesh
         var venus = new THREE.Mesh(sphereGeometry3, sphereMaterial3);
 
         // position venus
-        venus.position.x = -155.4599;
+        venus.position.x = -155.4599 * 1.5;
         venus.position.y = 3;
         venus.position.z = 2;
         venus.castShadow = true;
@@ -221,7 +258,7 @@ var nRingsMesh
         var earth = new THREE.Mesh(sphereGeometry4, sphereMaterial4);
 
         // position Earth
-        earth.position.x = -214.49426;
+        earth.position.x = -214.49426 * 1.5;
         earth.position.y = 3;
         earth.position.z = 2;
         earth.castShadow = true;
@@ -238,7 +275,7 @@ var nRingsMesh
         var earthMoon = new THREE.Mesh(sphereGeometry4, sphereMaterial4);
 
         // position Earth Moon
-        earthMoon.position.x = -232.99426;
+        earthMoon.position.x = -232.99426 * 1.5;
         earthMoon.position.y = 3;
         earthMoon.position.z = 2;
         earthMoon.castShadow = true;
@@ -253,7 +290,7 @@ var nRingsMesh
         var mars = new THREE.Mesh(sphereGeometry5, sphereMaterial5);
 
         // position Mars
-        mars.position.x = -327.5002;
+        mars.position.x = -327.5002 * 1.5;
         mars.position.y = 3;
         mars.position.z = 2;
         mars.castShadow = true;
@@ -270,7 +307,7 @@ var nRingsMesh
         var jupiter = new THREE.Mesh(sphereGeometry5, sphereMaterial5);
 
         // position Jupiter
-        jupiter.position.x = -1118.2915;
+        jupiter.position.x = -1118.2915 * 1.5;
         jupiter.position.y = 3;
         jupiter.position.z = 2;
         jupiter.castShadow = true;
@@ -310,7 +347,7 @@ var nRingsMesh
         var saturn = new THREE.Mesh(sphereGeometry5, sphereMaterial5);
 
         // position Saturn
-        saturn.position.x = -2053.7373;
+        saturn.position.x = -2053.7373 * 1.5;
         saturn.position.y = 3;
         saturn.position.z = 2;
         saturn.castShadow = true;
@@ -322,7 +359,7 @@ var nRingsMesh
 
         var loader = new THREE.TextureLoader();
         loader.load( imageDir + "saturnRings.png", function ( texture ) {
-        var sRingsGeometry = new THREE.PlaneGeometry( scale * 35, scale * 35, 30, 30 );
+        var sRingsGeometry = new THREE.PlaneBufferGeometry( scale * 35, scale * 35, 30, 30 );
         var sRingsMaterial = new THREE.MeshBasicMaterial( { map: texture, opacity: 0.5, side: THREE.DoubleSide, overdraw: true, transparent: true, wireframe: false } );
         sRingsMesh = new THREE.Mesh( sRingsGeometry, sRingsMaterial );
         sRingsMesh.position.x = saturn.position.x;
@@ -340,7 +377,7 @@ var nRingsMesh
         var uranus = new THREE.Mesh(sphereGeometry5, sphereMaterial5);
 
         // position Uranus
-        uranus.position.x = -4124.9879;
+        uranus.position.x = -4124.9879 * 1.5;
         uranus.position.y = 3;
         uranus.position.z = 2;
         uranus.castShadow = true;
@@ -357,7 +394,7 @@ var nRingsMesh
         var neptune = new THREE.Mesh(sphereGeometry5, sphereMaterial5);
 
         // position Neptune
-        neptune.position.x = -4471.70	;
+        neptune.position.x = -4471.70 * 1.5	;
         neptune.position.y = 3;
         neptune.position.z = 2;
         neptune.castShadow = true;
@@ -369,7 +406,7 @@ var nRingsMesh
 
         var loader = new THREE.TextureLoader();
         loader.load( imageDir + "neptunerings.png", function ( texture ) {
-        var nRingsGeometry = new THREE.PlaneGeometry( scale * .5, scale * .5, 30, 30 );
+        var nRingsGeometry = new THREE.PlaneBufferGeometry( scale * .5, scale * .5, 30, 30 );
         var nRingsMaterial = new THREE.MeshBasicMaterial( { map: texture, opacity: 0.5, side: THREE.DoubleSide, overdraw: true, transparent: true, wireframe: false } );
         nRingsMesh = new THREE.Mesh( nRingsGeometry, nRingsMaterial );
         nRingsMesh.position.x = neptune.position.x;
@@ -403,22 +440,22 @@ var nRingsMesh
         var axes = new THREE.AxisHelper(100);
         scene.add( axes );
         
-        // var imagePrefix = imageDir + "hubble";
-        // // var directions  = ["right", "left", "top", "bottom", "front", "back"];
-        // var imageSuffix = ".jpg";
-        // var skyGeometry = new THREE.CubeGeometry( 300000, 300000, 300000 );   
+        var imagePrefix = imageDir + "starfield";
+        // var directions  = ["right", "left", "top", "bottom", "front", "back"];
+        var imageSuffix = ".png";
+        var skyGeometry = new THREE.CubeGeometry( 300000, 300000, 300000 );   
         
-        // var materialArray = [];
-        // for (var i = 0; i < 6; i++)
-        //     materialArray.push( new THREE.MeshBasicMaterial({
-        //         map: THREE.ImageUtils.loadTexture( imagePrefix + imageSuffix ),
-        //         // between imagePrefix and imageSuffix add '+ direction[i]'
-        //         // for six different unique photos with '-right' and '-left' etc in their filepaths
-        //         side: THREE.BackSide
-        //     }));
-        // var skyMaterial = new THREE.MeshFaceMaterial( materialArray );
-        // var skyBox = new THREE.Mesh( skyGeometry, skyMaterial );
-        // scene.add( skyBox );
+        var materialArray = [];
+        for (var i = 0; i < 6; i++)
+            materialArray.push( new THREE.MeshBasicMaterial({
+                map: THREE.ImageUtils.loadTexture( imagePrefix + imageSuffix ),
+                // between imagePrefix and imageSuffix add '+ direction[i]'
+                // for six different unique photos with '-right' and '-left' etc in their filepaths
+                side: THREE.BackSide
+            }));
+        var skyMaterial = new THREE.MeshFaceMaterial( materialArray );
+        var skyBox = new THREE.Mesh( skyGeometry, skyMaterial );
+        scene.add( skyBox );
 
 
 
@@ -476,12 +513,44 @@ var nRingsMesh
             orbit.update();
         }
 
- 
-		$scope.earthView = function(){
-			camera.position.x = earth.position.x - 10
-        	camera.position.y = earth.position.y
-        	camera.position.z = earth.position.z
+ 		$scope.mercuryView = function(){
+			$scope.displayPlanet = "Mercury"
+			$scope.displayInfo = planets[0].description
+		}
 
+		$scope.venusView = function(){
+			$scope.displayPlanet = "Venus"
+			$scope.displayInfo = planets[1].description
+		}
+
+		$scope.earthView = function(){
+			$scope.displayPlanet = "Earth"
+			$scope.displayInfo = planets[2].description
+		}
+
+		$scope.marsView = function(){
+			$scope.displayPlanet = "Mars"
+			$scope.displayInfo = planets[3].description
+		}
+
+		$scope.jupiterView = function(){
+			$scope.displayPlanet = "Jupiter"
+			$scope.displayInfo = planets[4].description
+		}
+
+		$scope.saturnView = function(){
+			$scope.displayPlanet = "Saturn"
+			$scope.displayInfo = planets[5].description
+		}
+
+		$scope.uranusView = function(){
+			$scope.displayPlanet = "Uranus"
+			$scope.displayInfo = planets[6].description
+		}
+
+		$scope.neptuneView = function(){
+			$scope.displayPlanet = "Neptune"
+			$scope.displayInfo = planets[7].description
 		}
 
     }
