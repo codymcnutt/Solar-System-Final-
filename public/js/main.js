@@ -40,7 +40,7 @@ angular.module('Stars')
     },
 ]
 		
-	
+var planetCam
 
 var sRingsMesh
 var nRingsMesh
@@ -500,6 +500,66 @@ var nRingsMesh
                     asteroidOrbitPoints[i].add(kuiperBelt[i])
                 }
             }
+
+            $scope.sunCam = function(){
+            console.log("sun cam")
+            
+            sun.add(camera)
+        }
+
+            $scope.mercuryCam = function(){
+            console.log("mercury cam")
+            
+            mercury.add(camera)
+        }
+
+            $scope.venusCam = function(){
+            console.log("venus cam")
+            
+            venus.add(camera)
+        }
+
+            $scope.earthCam = function(){
+            console.log("earth cam")
+            
+            earth.add(camera)
+        }
+
+        $scope.marsCam = function(){
+            console.log("mars cam")
+            
+            mars.add(camera)
+        }
+
+            $scope.jupiterCam = function(){
+            console.log("jupiter cam")
+            
+            jupiter.add(camera)
+        }
+
+            $scope.saturnCam = function(){
+            console.log("saturn cam")
+            
+            saturn.add(camera)
+        }
+
+            $scope.uranusCam = function(){
+            console.log("uranus cam")
+            
+            uranus.add(camera)
+        }
+
+        $scope.neptuneCam = function(){
+            console.log("neptune cam")
+            
+            neptune.add(camera)
+        }
+
+
+        // $scope.mercuryCam = function(){
+        // 	planetCam = mercury
+        // 	planetCam.add(camera)
+        // }
 
             asteroidOrbit()
 
