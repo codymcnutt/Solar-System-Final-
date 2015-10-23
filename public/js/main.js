@@ -20,7 +20,7 @@ angular.module('Stars')
         var camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, .1, 320000);
 
         // create a render and set the size
-        var renderer = new THREE.WebGLRenderer({antialias:false});
+        var renderer = new THREE.WebGLRenderer({antialias:true});
 
         orbit = new THREE.OrbitControls(camera, renderer.domElement);
 
@@ -48,23 +48,28 @@ angular.module('Stars')
         var imageDir = "/img/"
 
         var kuiperBelt = []
+        var asteroidOrbitSpeeds = []
+        var asteroidOrbitPoints = []
 
 	var kuiperConstructor = function(){
 		var size = Math.random() * 10
+		var positiveOrNegX = Math.random()  
+		var positiveOrNegZ = Math.random() 
 		var scale = 3
-		var sphereGeometry = new THREE.SphereGeometry( scale * size, 5, 5);
-        var asteroidTexture = THREE.ImageUtils.loadTexture(imageDir + "moon.jpg")
-        var sphereMaterial = new THREE.MeshLambertMaterial();
-        var asteroid = new THREE.Mesh(sphereGeometry, sphereMaterial);
+		var sphereGeometry = new THREE.SphereGeometry( scale * size, 5, 5)
+        var sphereMaterial = new THREE.MeshLambertMaterial()
+        var asteroid = new THREE.Mesh(sphereGeometry, sphereMaterial)
 
-        var asteroidLocX = Math.random() * 800
-        var asteroidLocZ = Math.random() * 800
+        var asteroidLocX = positiveOrNegX >= 0.5 ? (Math.random() + 1) * 450 : (Math.random() + 1) * -450
+        var asteroidLocZ = positiveOrNegZ >= 0.5 ? (Math.random() + 1) : (Math.random() + 1 ) 
 
-
-        asteroid.position.x = asteroidLocX;
-        asteroid.position.y = 3
+        asteroid.position.x = asteroidLocX
+        asteroid.position.y = 0
         asteroid.position.z = asteroidLocZ
-        asteroid.castShadow = true;
+        asteroid.castShadow = true
+
+        kuiperBelt.push(asteroid)
+        asteroidOrbitSpeeds.push(Math.random() + 1 * ((.1/20)))
 
         scene.add(asteroid)
 	}
@@ -268,12 +273,31 @@ angular.module('Stars')
         // add Jupiter to the scene
         scene.add(jupiter);
 
-        for(var x = 0; x < 2000; x++){
+// 
+
+        for(var i = 0; i < 20; i++){
         	kuiperConstructor()
+
+        	var sphereGeometry = new THREE.SphereGeometry(1, 1, 1);
+	        var asteroidOrbitPoint = new THREE.Mesh(sphereGeometry, sphereMaterial);
+
+	        // position the second fake planet
+	        asteroidOrbitPoint.position.x = 20;
+	        asteroidOrbitPoint.position.y = 300;
+	        asteroidOrbitPoint.position.z = 2;
+	        asteroidOrbitPoint.castShadow = false;
+
+	        // add the second fake planet to the scene
+	        scene.add(asteroidOrbitPoint);
+
+        	asteroidOrbitPoints.push(asteroidOrbitPoint)
+        	
+
+
         }
-        for(var x = 0; x < kuiperConstructor.length; i++){
-        	scene.add(kuiperConstructor[i])
-        }
+        // for(var x = 0; x < kuiperConstructor.length; i++){
+        // 	scene.add(kuiperConstructor[i])
+        // }
 
         // create Saturn
         var sphereGeometry5 = new THREE.SphereGeometry( scale * 8.3653, 20, 20);
@@ -397,8 +421,6 @@ angular.module('Stars')
             uranusOrbitPoint.rotation.y += (.1/20) * .228
             neptuneOrbitPoint.rotation.y += (.1/20) * .0182
 
-
-            
 
             // rotate sun
             sun.rotation.y += .1/20
