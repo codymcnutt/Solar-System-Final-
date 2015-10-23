@@ -3,9 +3,7 @@ angular.module('Stars', [])
 angular.module('Stars')
 	.controller("MainController", ["$scope", function($scope){
 		
-	var moonConstructor = function(parentPlanet, numOfMoons, closestMoon, farthestMoon, smallestMoon, largestMoon){
-
-	}
+	
 
 
 	
@@ -52,7 +50,7 @@ angular.module('Stars')
         var asteroidOrbitPoints = []
 
 	var kuiperConstructor = function(){
-		var size = Math.random() * 10
+		var size = Math.random() * 5
 		var positiveOrNegX = Math.random()  
 		var positiveOrNegZ = Math.random() 
 		var scale = 3
@@ -60,11 +58,11 @@ angular.module('Stars')
         var sphereMaterial = new THREE.MeshLambertMaterial()
         var asteroid = new THREE.Mesh(sphereGeometry, sphereMaterial)
 
-        var asteroidLocX = positiveOrNegX >= 0.5 ? (Math.random() + 1) * 450 : (Math.random() + 1) * -450
+        var asteroidLocX = positiveOrNegX >= 0.5 ? (Math.random() + 1) * 4500 : (Math.random() + 1) * -4500
         var asteroidLocZ = positiveOrNegZ >= 0.5 ? (Math.random() + 1) : (Math.random() + 1 ) 
 
         asteroid.position.x = asteroidLocX
-        asteroid.position.y = 0
+        asteroid.position.y = 3
         asteroid.position.z = asteroidLocZ
         asteroid.castShadow = true
 
@@ -275,7 +273,7 @@ angular.module('Stars')
 
 // 
 
-        for(var i = 0; i < 20; i++){
+        for(var i = 0; i < 2000; i++){
         	kuiperConstructor()
 
         	var sphereGeometry = new THREE.SphereGeometry(1, 1, 1);
@@ -283,7 +281,7 @@ angular.module('Stars')
 
 	        // position the second fake planet
 	        asteroidOrbitPoint.position.x = 20;
-	        asteroidOrbitPoint.position.y = 300;
+	        asteroidOrbitPoint.position.y = 3;
 	        asteroidOrbitPoint.position.z = 2;
 	        asteroidOrbitPoint.castShadow = false;
 
@@ -387,6 +385,8 @@ angular.module('Stars')
         // var skyBox = new THREE.Mesh( skyGeometry, skyMaterial );
         // scene.add( skyBox );
 
+
+
         render();
 
         function render() {
@@ -412,15 +412,23 @@ angular.module('Stars')
             saturn.rotation.y += .1/20 * .444
             uranus.rotation.y += .1/20 * .718
             neptune.rotation.y += .1/20 * .671
-
+            jupiterOrbitPoint.rotation.y += (.1/20) * .434
             mercuryOrbitPoint.rotation.y += (.1/20) * 1.607 
             marsOrbitPoint.rotation.y += (.1/20) * .802 
             venusOrbitPoint.rotation.y += (.1/20) * 1.174
-            jupiterOrbitPoint.rotation.y += (.1/20) * .434
+            
             saturnOrbitPoint.rotation.y += (.1/20) * .323
             uranusOrbitPoint.rotation.y += (.1/20) * .228
             neptuneOrbitPoint.rotation.y += (.1/20) * .0182
 
+            var asteroidOrbit = function(){
+                for(var i = 0; i < kuiperBelt.length; i ++){
+                    asteroidOrbitPoints[i].rotation.y += (.1/20) * asteroidOrbitSpeeds[i]
+                    asteroidOrbitPoints[i].add(kuiperBelt[i])
+                }
+            }
+
+            asteroidOrbit()
 
             // rotate sun
             sun.rotation.y += .1/20
