@@ -96,7 +96,7 @@ var nRingsMesh
         var sphereMaterial = new THREE.MeshLambertMaterial()
         var asteroid = new THREE.Mesh(sphereGeometry, sphereMaterial)
 
-        var asteroidLocX = positiveOrNegX >= 0.5 ? (Math.random() + 1) * 5000 : (Math.random() + 1) * -5000
+        var asteroidLocX = positiveOrNegX >= 0.5 ? (Math.random() + 1) * 8000 : (Math.random() + 1) * -8000
         var asteroidLocZ = positiveOrNegZ >= 0.5 ? (Math.random() + 1) : (Math.random() + 1 ) 
 
         asteroid.position.x = asteroidLocX
@@ -254,8 +254,29 @@ var nRingsMesh
         // create Earth
         var sphereGeometry4 = new THREE.SphereGeometry( scale * .9154, 20, 20);
         var earthTexture = THREE.ImageUtils.loadTexture(imageDir + "earth.jpg")
-        var sphereMaterial4 = new THREE.MeshPhongMaterial({map: earthTexture});
-        var earth = new THREE.Mesh(sphereGeometry4, sphereMaterial4);
+          var sphereMaterial4 = new THREE.MeshPhongMaterial({map: earthTexture});
+
+        var bumpMap = THREE.ImageUtils.loadTexture(imageDir + "clouds.jpg");
+            var sphereMaterialGroundEarth = new THREE.MeshBasicMaterial({map : bumpMap});
+            var sphereMaterialBump = new THREE.MeshBasicMaterial({wireframe : false, opacity:0.5, transparent:true, map : bumpMap, overdraw:10});
+       
+
+
+        var earth = new THREE.SceneUtils.createMultiMaterialObject(sphereGeometry4, [sphereMaterial4, sphereMaterialBump]);
+      
+
+
+ // var sphereGeometry = new THREE.SphereGeometry(100, 90, 50);
+ //        var sunTexture = THREE.ImageUtils.loadTexture(imageDir + "suntexture.jpg", THREE.SphericalReflectionMapping);
+ //        var groundLayer = THREE.ImageUtils.loadTexture(imageDir + "sun.jpg")
+
+ //        var sphereMaterial2 = new THREE.MeshBasicMaterial({map : groundLayer});
+      
+ //        var sphereMaterial = new THREE.MeshBasicMaterial({wireframe : false, opacity:0.4, transparent:true, envMap : sunTexture, overdraw:5000});
+ //        var sun = new THREE.SceneUtils.createMultiMaterialObject(sphereGeometry, [ sphereMaterial2, sphereMaterial]);
+
+
+
 
         // position Earth
         earth.position.x = -214.49426 * 1.5;
@@ -406,7 +427,7 @@ var nRingsMesh
 
         var loader = new THREE.TextureLoader();
         loader.load( imageDir + "neptunerings.png", function ( texture ) {
-        var nRingsGeometry = new THREE.PlaneBufferGeometry( scale * .5, scale * .5, 30, 30 );
+        var nRingsGeometry = new THREE.PlaneBufferGeometry( scale * 12, scale * 12, 30, 30 );
         var nRingsMaterial = new THREE.MeshBasicMaterial( { map: texture, opacity: 0.5, side: THREE.DoubleSide, overdraw: true, transparent: true, wireframe: false } );
         nRingsMesh = new THREE.Mesh( nRingsGeometry, nRingsMaterial );
         nRingsMesh.position.x = neptune.position.x;
@@ -425,7 +446,7 @@ var nRingsMesh
         scene.add(ambientLight);
 
         // add light source for the sun
-        var light = new THREE.PointLight( "white", 1.5, 2500, 100);
+        var light = new THREE.PointLight( "white", 1.5, 10000, 900);
         light.position.set( 50, 50, 25 );
         scene.add( light );
 
