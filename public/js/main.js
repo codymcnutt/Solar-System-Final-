@@ -5,7 +5,8 @@ angular.module('Stars')
 		
 	
 
-
+var sRingsMesh
+var nRingsMesh
 	
 	function init() {
 
@@ -41,7 +42,7 @@ angular.module('Stars')
         // add the plane to the scene
         scene.add(plane);
 
-       	var scale = 3
+       	var scale = 6
 
         var imageDir = "/img/"
 
@@ -58,7 +59,7 @@ angular.module('Stars')
         var sphereMaterial = new THREE.MeshLambertMaterial()
         var asteroid = new THREE.Mesh(sphereGeometry, sphereMaterial)
 
-        var asteroidLocX = positiveOrNegX >= 0.5 ? (Math.random() + 1) * 4500 : (Math.random() + 1) * -4500
+        var asteroidLocX = positiveOrNegX >= 0.5 ? (Math.random() + 1) * 5000 : (Math.random() + 1) * -5000
         var asteroidLocZ = positiveOrNegZ >= 0.5 ? (Math.random() + 1) : (Math.random() + 1 ) 
 
         asteroid.position.x = asteroidLocX
@@ -208,6 +209,8 @@ angular.module('Stars')
         venus.position.z = 2;
         venus.castShadow = true;
 
+        venus.rotation.x = THREE.Math.degToRad(- 177.36);
+
         // add venus
         scene.add(venus);
 
@@ -222,6 +225,8 @@ angular.module('Stars')
         earth.position.y = 3;
         earth.position.z = 2;
         earth.castShadow = true;
+
+        earth.rotation.x = THREE.Math.degToRad(- 23.4);
 
         // add Earth to the scene
         scene.add(earth);
@@ -253,6 +258,8 @@ angular.module('Stars')
         mars.position.z = 2;
         mars.castShadow = true;
 
+        mars.rotation.x = THREE.Math.degToRad(- 25.19);
+
         // add Mars
         scene.add(mars);
 
@@ -267,6 +274,8 @@ angular.module('Stars')
         jupiter.position.y = 3;
         jupiter.position.z = 2;
         jupiter.castShadow = true;
+
+        jupiter.rotation.x = THREE.Math.degToRad(- 3.13);
 
         // add Jupiter to the scene
         scene.add(jupiter);
@@ -293,9 +302,6 @@ angular.module('Stars')
 
 
         }
-        // for(var x = 0; x < kuiperConstructor.length; i++){
-        // 	scene.add(kuiperConstructor[i])
-        // }
 
         // create Saturn
         var sphereGeometry5 = new THREE.SphereGeometry( scale * 8.3653, 20, 20);
@@ -309,8 +315,23 @@ angular.module('Stars')
         saturn.position.z = 2;
         saturn.castShadow = true;
 
+        saturn.rotation.x = THREE.Math.degToRad( - 26.7);
+
         // add Saturn
         scene.add(saturn);
+
+        var loader = new THREE.TextureLoader();
+        loader.load( imageDir + "saturnRings.png", function ( texture ) {
+        var sRingsGeometry = new THREE.PlaneGeometry( scale * 35, scale * 35, 30, 30 );
+        var sRingsMaterial = new THREE.MeshBasicMaterial( { map: texture, opacity: 0.5, side: THREE.DoubleSide, overdraw: true, transparent: true, wireframe: false } );
+        sRingsMesh = new THREE.Mesh( sRingsGeometry, sRingsMaterial );
+        sRingsMesh.position.x = saturn.position.x;
+        sRingsMesh.position.y = 3;
+        sRingsMesh.position.z = 2;
+
+        sRingsMesh.rotation.x = THREE.Math.degToRad( 90 - 26.7);
+
+        scene.add( sRingsMesh )});
 
         // create Uranus
         var sphereGeometry5 = new THREE.SphereGeometry( scale * 3.3723, 20, 20);
@@ -324,11 +345,13 @@ angular.module('Stars')
         uranus.position.z = 2;
         uranus.castShadow = true;
 
+        uranus.rotation.x = THREE.Math.degToRad(- 97.77);
+
         // add Uranus to the scene
         scene.add(uranus);
 
         // create Neptune
-        var sphereGeometry5 = new THREE.SphereGeometry( scale * .4856, 20, 20);
+        var sphereGeometry5 = new THREE.SphereGeometry( scale * 3.4856, 20, 20);
         var marsTexture = THREE.ImageUtils.loadTexture(imageDir + "neptune.jpg")
         var sphereMaterial5 = new THREE.MeshLambertMaterial({map: marsTexture});
         var neptune = new THREE.Mesh(sphereGeometry5, sphereMaterial5);
@@ -339,8 +362,20 @@ angular.module('Stars')
         neptune.position.z = 2;
         neptune.castShadow = true;
 
+        neptune.rotation.x = THREE.Math.degToRad(- 28.32);
+
         // add Neptune to the scene
         scene.add(neptune);
+
+        var loader = new THREE.TextureLoader();
+        loader.load( imageDir + "neptunerings.png", function ( texture ) {
+        var nRingsGeometry = new THREE.PlaneGeometry( scale * .5, scale * .5, 30, 30 );
+        var nRingsMaterial = new THREE.MeshBasicMaterial( { map: texture, opacity: 0.5, side: THREE.DoubleSide, overdraw: true, transparent: true, wireframe: false } );
+        nRingsMesh = new THREE.Mesh( nRingsGeometry, nRingsMaterial );
+        nRingsMesh.position.x = neptune.position.x;
+        nRingsMesh.position.y = 3;
+        nRingsMesh.position.z = 2;
+        scene.add( nRingsMesh )});
 
         // position and point the camera to the center of the scene
         camera.position.x = 1;
@@ -390,7 +425,6 @@ angular.module('Stars')
         render();
 
         function render() {
-            // stats.update();
             
             mercuryOrbitPoint.add(mercury)
             venusOrbitPoint.add(venus)
@@ -399,8 +433,10 @@ angular.module('Stars')
             marsOrbitPoint.add(mars)
             jupiterOrbitPoint.add(jupiter)
             saturnOrbitPoint.add(saturn)
+            saturnOrbitPoint.add(sRingsMesh)
             uranusOrbitPoint.add(uranus)
             neptuneOrbitPoint.add(neptune)
+            neptuneOrbitPoint.add(nRingsMesh)
             
             // rotate earth 
             mercury.rotation.y += .1/20 / 175.9
@@ -432,7 +468,6 @@ angular.module('Stars')
 
             // rotate sun
             sun.rotation.y += .1/20
-           
 
 
             // render using requestAnimationFrame

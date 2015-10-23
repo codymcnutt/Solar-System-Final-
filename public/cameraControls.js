@@ -16,6 +16,10 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 	this.center = new THREE.Vector3();
 
+	var newCenter = function(x, y, z){
+		this.center = new THREE.Vector3(x, y ,z)
+	}
+
 	this.userZoom = true;
 	this.userZoomSpeed = 1.0;
 
